@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +29,8 @@ Route::get('/users/{id}', function ($id) {
     return \App\Models\User::find($id);
 });
 
+Route::get('/posts', [PostController::class,'index']);
+Route::get('/posts/{post}', [PostController::class,'show']);
+Route::post('/posts', [PostController::class,'store'])->middleware('auth:sanctum');
+Route::put('/posts/{post}', [PostController::class,'update'])->middleware('auth:sanctum');
+Route::delete('/posts/{post}', [PostController::class,'destroy'])->middleware('auth:sanctum');
