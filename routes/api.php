@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,8 @@ Route::get('/users', function () {
 Route::get('/users/{id}', function ($id) {
     return \App\Models\User::find($id);
 });
+
+Route::post('login', [ApiAuthController::class,'login']);
+Route::post('register', [ApiAuthController::class,'register']);
+Route::post('logout', [ApiAuthController::class,'logout'])->middleware('auth:sanctum');
 
