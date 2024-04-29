@@ -35,4 +35,21 @@ class PostController extends Controller
         ];
         return response()->json($data, 201);
     }
+
+    public function update(Request $request, Post $post)
+    {
+        $request->validate([
+            'content' => 'required',
+        ]);
+
+        $post->content = $request->content;
+        $post->save();
+
+        $data = [
+            'status' => 'success',
+            'message' => 'Post updated successfully',
+            'data' => $post
+        ];
+        return response()->json($data, 200);
+    }
 }
